@@ -1,0 +1,3 @@
+package com.zest.products.auth;
+import jakarta.validation.Valid; import jakarta.validation.constraints.*; import org.springframework.web.bind.annotation.*;
+@RestController @RequestMapping("/api/v1/auth") public class AuthController { private final AuthService service; public AuthController(AuthService s){service=s;} public record LoginRequest(@NotBlank String username,@NotBlank String password){} public record RefreshRequest(@NotBlank String refreshToken){} @PostMapping("/login") AuthService.Tokens login(@Valid @RequestBody LoginRequest r){return service.login(r.username(),r.password());} @PostMapping("/refresh") AuthService.Tokens refresh(@Valid @RequestBody RefreshRequest r){return service.refresh(r.refreshToken());} }

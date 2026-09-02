@@ -1,0 +1,2 @@
+package com.zest.products.config; import com.zest.products.auth.*; import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.*; import org.springframework.security.crypto.password.PasswordEncoder;
+@Configuration public class DataInitializer { @Bean CommandLineRunner demoUser(AppUserRepository users,PasswordEncoder encoder){return a->{if(users.findByUsername("admin").isEmpty()){AppUser u=new AppUser();u.setUsername("admin");u.setPassword(encoder.encode("Admin123!"));u.getRoles().add("ADMIN");u.getRoles().add("USER");users.save(u);}};} }
